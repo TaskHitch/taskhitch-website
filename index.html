@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A TaskHitch marketing-site concept.">
+  <title>TaskHitch — Work in full view</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #faf8f6;
+      --paper-deep: #f5f1ed;
+      --line: #e7e0d9;
+      --line-strong: #d5cdc3;
+      --clay: #776a5b;
+      --ink: #2c2721;
+      --chrome: #3a332c;
+      --blue: #1b5a8f;
+      --blue-light: #70ade1;
+      --blue-wash: #edf3f9;
+      --green: #2f7d55;
+      --red: #b33a32;
+      --orange: #b86a20;
+      --serif: "Source Serif 4", Georgia, serif;
+      --sans: "Atkinson Hyperlegible", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); }
+    a { color: inherit; }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 3px; }
+    .page { overflow: hidden; }
+    .wrap { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
+    .eyebrow { color: var(--blue); font-size: .75rem; font-weight: 700; letter-spacing: .085em; margin: 0 0 16px; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -.025em; line-height: 1.05; text-wrap: balance; }
+    h1 { font-size: clamp(3.25rem, 6vw, 5.8rem); max-width: 800px; margin-bottom: 26px; }
+    h2 { font-size: clamp(2.25rem, 4vw, 3.55rem); margin-bottom: 22px; }
+    h3 { font-size: 1.45rem; margin-bottom: 10px; }
+    p { max-width: 66ch; }
+    .lead { color: #5f5549; font-size: clamp(1.12rem, 1.6vw, 1.3rem); line-height: 1.55; }
+    .button { align-items: center; border-radius: 6px; display: inline-flex; font-weight: 700; gap: 9px; justify-content: center; min-height: 45px; padding: 10px 17px; text-decoration: none; transition: background .18s ease, transform .18s ease; }
+    .button:hover { transform: translateY(-1px); }
+    .button.primary { background: var(--blue); color: white; }
+    .button.primary:hover { background: #144970; }
+    .button.secondary { color: var(--blue); }
+    .arrow { font-size: 1.15em; line-height: 1; }
+
+    /* Header */
+    .masthead { background: rgba(250,248,246,.94); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; backdrop-filter: blur(12px); }
+    .nav { align-items: center; display: flex; height: 98px; justify-content: space-between; }
+    .brand { align-items: center; display: inline-flex; gap: 14px; }
+    .brand img { display: block; height: auto; width: auto; }
+    .brand .brand-mark { height: 48px; width: 53px; }
+    .brand .brand-wordmark { height: 48px; }
+    .nav-links { align-items: center; display: flex; gap: 18px; }
+    .nav-links a { color: #5f5549; font-size: .86rem; font-weight: 700; text-decoration: none; }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-actions { align-items: center; display: flex; }
+    .nav .button { font-size: .9rem; min-height: 39px; padding: 8px 13px; }
+
+    /* Hero */
+    .hero { padding: clamp(78px, 11vw, 150px) 0 76px; }
+    .hero-copy { max-width: 840px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 31px; }
+    .hero-note { color: var(--clay); font-size: .86rem; margin: 18px 0 0; }
+    .hero-note span { color: var(--blue); font-weight: 700; }
+
+    /* Product canvas */
+    .product-frame { background: #fff; border: 1px solid var(--line-strong); border-radius: 12px; box-shadow: 0 18px 42px rgba(44, 39, 33, .10); margin: 0 auto; max-width: 1200px; overflow: hidden; }
+    .hero-product-capture { display: block; height: auto; width: 100%; }
+    .appbar { align-items: center; background: #f7f4f1; border-bottom: 1px solid var(--line); display: flex; height: 44px; padding: 0 15px; }
+    .dots { display: flex; gap: 6px; }
+    .dots i { background: #d5cdc3; border-radius: 50%; display: block; height: 8px; width: 8px; }
+    .appbar-title { color: #776a5b; font-size: .72rem; font-weight: 700; margin: 0 auto; }
+    .app { display: grid; grid-template-columns: 182px minmax(0, 1fr); min-height: 510px; }
+    .sidebar { background: var(--chrome); color: #f5f1ed; padding: 18px 10px; }
+    .sidebar-logo { align-items: center; display: flex; gap: 8px; font-size: .86rem; font-weight: 700; margin: 0 8px 22px; }
+    .sidebar-logo img { display: none; }
+    .side-label { color: #b8ac9f; font-size: .62rem; font-weight: 700; letter-spacing: .08em; margin: 17px 8px 6px; text-transform: uppercase; }
+    .side-item { border-radius: 5px; color: #e7e0d9; display: flex; font-size: .76rem; gap: 8px; margin: 2px 0; padding: 7px 8px; }
+    .side-item.active { background: #51483f; color: white; }
+    .side-item b { color: var(--blue-light); font-weight: 700; margin-left: auto; }
+    .app-main { background: #fbfaf8; padding: 24px; }
+    .app-top { align-items: flex-start; display: flex; justify-content: space-between; margin-bottom: 22px; }
+    .crumb { color: #776a5b; font-size: .7rem; font-weight: 700; margin-bottom: 5px; }
+    .app-top h3 { font-family: var(--sans); font-size: 1.08rem; font-weight: 700; letter-spacing: -.01em; margin: 0; }
+    .app-top .button { font-size: .72rem; min-height: 31px; padding: 5px 9px; }
+    .board { display: grid; gap: 12px; grid-template-columns: repeat(3, minmax(170px, 1fr)); }
+    .board-col { background: #f4f0ec; border: 1px solid #e6dfd8; border-radius: 8px; min-height: 370px; padding: 10px; }
+    .col-heading { align-items: center; color: #5f5549; display: flex; font-size: .7rem; font-weight: 700; justify-content: space-between; margin: 0 0 10px; }
+    .col-heading span { background: #e7e0d9; border-radius: 10px; color: #776a5b; font-size: .62rem; padding: 1px 6px; }
+    .task-card { background: white; border: 1px solid #e0d8d0; border-radius: 6px; margin-bottom: 8px; padding: 10px; }
+    .task-card.priority { border-left: 3px solid var(--orange); }
+    .task-card.blocked { border-left: 3px solid var(--red); }
+    .task-name { color: #3a332c; font-size: .74rem; font-weight: 700; line-height: 1.35; }
+    .task-meta { align-items: center; color: #776a5b; display: flex; font-size: .62rem; gap: 7px; margin-top: 9px; }
+    .avatar { background: #e7e0d9; border-radius: 50%; color: #5f5549; display: inline-grid; font-size: .56rem; font-weight: 700; height: 18px; place-items: center; width: 18px; }
+    .badge { border-radius: 4px; font-size: .57rem; font-weight: 700; margin-left: auto; padding: 2px 5px; }
+    .badge.blocked { background: #f5e5e3; color: #8f2d27; }
+    .badge.milestone { background: #e9f1f8; color: #144970; }
+    .caption { color: #776a5b; font-size: .86rem; margin: 14px auto 0; max-width: 780px; text-align: center; }
+
+    section { padding: clamp(78px, 11vw, 140px) 0; }
+    .section-intro { margin-bottom: 48px; }
+
+    /* Screens */
+    .screen-stack { display: grid; gap: 21px; }
+    .feature-screen { align-items: center; display: grid; gap: clamp(32px, 7vw, 94px); grid-template-columns: .78fr 1.22fr; }
+    .feature-screen.reverse { grid-template-columns: 1.22fr .78fr; }
+    .screen-stack > .feature-screen:nth-of-type(1) { grid-template-columns: .62fr 1.38fr; }
+    .screen-stack > .feature-screen:nth-of-type(2) { grid-template-columns: 1.38fr .62fr; }
+    .feature-screen.reverse .screen-copy { grid-column: 2; grid-row: 1; }
+    .feature-screen.reverse .mini-frame { grid-column: 1; grid-row: 1; }
+    .screen-number { color: var(--blue); font-size: .78rem; font-weight: 700; letter-spacing: .08em; margin-bottom: 13px; }
+    .screen-copy p { color: #5f5549; }
+    .mini-frame { background: white; border: 1px solid var(--line-strong); border-radius: 10px; box-shadow: 0 12px 26px rgba(44,39,33,.07); overflow: hidden; }
+    .product-capture { margin: 0; }
+    .product-capture img { display: block; height: auto; width: 100%; }
+    .mini-top { align-items: center; background: #f7f4f1; border-bottom: 1px solid var(--line); display: flex; height: 34px; padding: 0 11px; }
+    .mini-top span { color: #776a5b; font-size: .6rem; font-weight: 700; margin-left: auto; }
+    .timeline { padding: 25px 23px 20px; }
+    .timeline-title { color: #3a332c; font-size: .8rem; font-weight: 700; margin-bottom: 23px; }
+    .months { border-bottom: 1px solid var(--line); color: #988977; display: grid; font-size: .59rem; font-weight: 700; grid-template-columns: repeat(4, 1fr); padding-bottom: 7px; }
+    .tl-row { align-items: center; border-bottom: 1px solid #f0ebe6; display: grid; font-size: .62rem; grid-template-columns: 132px 1fr; min-height: 43px; }
+    .tl-name { color: #5f5549; font-weight: 700; }
+    .tl-line { background: repeating-linear-gradient(to right, transparent 0, transparent calc(25% - 1px), #eee8e2 calc(25% - 1px), #eee8e2 25%); height: 100%; position: relative; }
+    .bar { border-radius: 4px; height: 12px; position: absolute; top: 15px; }
+    .bar.one { background: #d6e4f0; left: 4%; width: 48%; }
+    .bar.two { background: #70ade1; left: 27%; width: 44%; }
+    .bar.three { background: #f0d8bd; left: 48%; width: 28%; }
+    .bar.four { background: #d9e8df; left: 69%; width: 23%; }
+    .task-view { display: grid; grid-template-columns: 1.45fr .8fr; min-height: 290px; }
+    .task-detail { padding: 25px; }
+    .task-detail .task-state { color: var(--blue); font-size: .63rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+    .task-detail h4 { color: #3a332c; font-family: var(--sans); font-size: 1rem; line-height: 1.3; margin: 7px 0 14px; }
+    .task-detail p { color: #776a5b; font-size: .7rem; line-height: 1.55; margin: 0; }
+    .context { border-left: 1px solid var(--line); padding: 20px 16px; }
+    .context h5 { color: #776a5b; font-size: .61rem; letter-spacing: .06em; margin: 0 0 11px; text-transform: uppercase; }
+    .context-item { border-bottom: 1px solid #eee8e2; color: #5f5549; font-size: .66rem; padding: 9px 0; }
+    .context-item strong { color: #3a332c; display: block; font-size: .68rem; }
+
+    /* Difference */
+    .difference { background: var(--chrome); color: var(--paper); }
+    .difference .wrap { position: relative; z-index: 1; }
+    .difference .eyebrow { color: var(--blue-light); }
+    .difference p { color: #d5cdc3; }
+    .principles { display: grid; gap: 1px; grid-template-columns: repeat(3, 1fr); margin-top: 46px; }
+    .principle { border-left: 1px solid #5f5549; padding: 6px 28px 14px; }
+    .principle:first-child { border-left: 0; padding-left: 0; }
+    .principle h3 { font-size: 1.35rem; }
+    .principle p { font-size: .96rem; margin: 0; }
+
+    /* Advanced */
+    .advanced-grid { align-items: center; display: grid; gap: 64px; grid-template-columns: .87fr 1.13fr; }
+    .advanced-panel { background: #fff; border: 1px solid var(--line-strong); border-radius: 12px; box-shadow: 0 13px 26px rgba(44,39,33,.06); overflow: hidden; }
+    .email-top { align-items: center; background: #f7f4f1; border-bottom: 1px solid var(--line); color: #776a5b; display: flex; font-size: .68rem; font-weight: 700; justify-content: space-between; padding: 12px 17px; }
+    .email-body { padding: 25px 28px; }
+    .email-to { border-bottom: 1px solid var(--line); color: #776a5b; font-size: .67rem; padding-bottom: 15px; }
+    .email-body h4 { color: #3a332c; font-family: var(--sans); font-size: .94rem; margin: 18px 0 11px; }
+    .email-body p { color: #5f5549; font-size: .75rem; line-height: 1.6; }
+    .email-button { background: var(--blue); border-radius: 5px; color: white; display: inline-block; font-size: .7rem; font-weight: 700; margin: 4px 0 19px; padding: 8px 11px; }
+    .email-foot { border-top: 1px solid var(--line); color: #988977; font-size: .61rem; padding-top: 14px; }
+    .plan-note { background: var(--blue-wash); border-left: 3px solid var(--blue); color: #144970; font-size: .82rem; line-height: 1.45; margin-top: 26px; padding: 12px 14px; }
+
+    /* Launch updates */
+    .coming-soon { background: var(--paper-deep); }
+    .coming-grid { align-items: center; display: grid; gap: clamp(32px, 8vw, 108px); grid-template-columns: .9fr 1.1fr; }
+    .coming-card { background: var(--paper); border: 1px solid var(--line-strong); border-radius: 12px; box-shadow: 0 15px 30px rgba(44,39,33,.07); padding: clamp(25px, 4vw, 42px); }
+    .coming-card .eyebrow { margin-bottom: 11px; }
+    .coming-card h3 { font-size: 1.7rem; margin-bottom: 23px; }
+    .signup-form { display: grid; gap: 16px; }
+    .form-row { display: grid; gap: 6px; }
+    .form-row label { color: #5f5549; font-size: .78rem; font-weight: 700; }
+    .form-row input { background: white; border: 1px solid var(--line-strong); border-radius: 6px; color: var(--ink); font: inherit; font-size: .94rem; min-height: 46px; padding: 10px 12px; }
+    .form-row input:focus { border-color: var(--blue); outline: 2px solid var(--blue-wash); outline-offset: 1px; }
+    .signup-form .button { border: 0; cursor: pointer; margin-top: 5px; width: 100%; }
+    .form-note { color: #776a5b; font-size: .73rem; line-height: 1.45; margin: 0; }
+
+    /* Founder/footer */
+    .founder { display: grid; gap: 60px; grid-template-columns: .7fr 1.3fr; }
+    .quote-mark { color: var(--blue); font-family: var(--serif); font-size: 6.8rem; line-height: .7; }
+    .founder blockquote { font-family: var(--serif); font-size: clamp(1.5rem, 2.6vw, 2.2rem); letter-spacing: -.018em; line-height: 1.28; margin: 0; max-width: 31ch; }
+    .founder-copy p { color: #5f5549; font-size: 1.03rem; }
+    .founder-sign { color: #776a5b; font-size: .9rem; margin-top: 24px; }
+    .founder-sign strong { color: #3a332c; display: block; }
+    .footer { background: var(--chrome); color: var(--paper); padding: 58px 0 29px; }
+    .footer-top { align-items: flex-end; display: flex; justify-content: space-between; }
+    .footer-brand { max-width: 334px; }
+    .footer-lockup { align-items: stretch; display: grid; gap: 18px; grid-template-columns: 96px 220px; width: 334px; }
+    .footer-brand img { display: block; height: auto; }
+    .footer-brand .footer-mark { align-self: stretch; height: 100%; margin: 0; object-fit: contain; width: 96px; }
+    .footer-copy { align-content: space-between; display: grid; grid-template-rows: auto auto; width: 220px; }
+    .footer-brand .footer-wordmark { width: 220px; }
+    .footer-brand p.footer-tagline { color: #d5cdc3; font-size: 1.5rem; font-weight: 700; letter-spacing: -.02em; line-height: 1; margin: 0; white-space: nowrap; width: 220px; }
+    .footer-nav { display: flex; gap: 20px; }
+    .footer-nav a { color: #d5cdc3; font-size: .83rem; text-decoration: none; }
+    .footer-nav a:hover { color: var(--blue-light); }
+    .footer-bottom { border-top: 1px solid #5f5549; color: #b8ac9f; font-size: .76rem; margin-top: 57px; padding-top: 18px; }
+
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 32px, 1180px); }
+      .nav { height: 75px; }
+      .nav-links, .nav-actions .button { display: none; }
+      .brand { gap: 10px; }
+      .brand .brand-mark { height: 38px; width: 42px; }
+      .brand .brand-wordmark { height: 38px; }
+      h1 { font-size: clamp(2.85rem, 14vw, 4.3rem); }
+      .hero { padding-top: 74px; }
+      .app { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .app-main { padding: 15px; }
+      .board { gap: 8px; overflow: hidden; }
+      .board-col { min-width: 0; padding: 7px; }
+      .task-card { padding: 7px; }
+      .task-name { font-size: .63rem; }
+      .task-meta { font-size: .53rem; gap: 3px; }
+      .avatar { display: none; }
+      .badge { display: none; }
+      .feature-screen, .feature-screen.reverse, .advanced-grid, .coming-grid, .founder { grid-template-columns: 1fr; }
+      .screen-stack > .feature-screen:nth-of-type(1), .screen-stack > .feature-screen:nth-of-type(2) { grid-template-columns: 1fr; }
+      .feature-screen.reverse .screen-copy, .feature-screen.reverse .mini-frame { grid-column: auto; grid-row: auto; }
+      .feature-screen.reverse .mini-frame { order: 2; }
+      .principles { grid-template-columns: 1fr; }
+      .principle, .principle:first-child { border-left: 0; border-top: 1px solid #5f5549; padding: 20px 0; }
+      .principle:first-child { border-top: 0; padding-top: 0; }
+      .footer-top { align-items: flex-start; flex-direction: column; gap: 40px; }
+      .footer-lockup { gap: 14px; grid-template-columns: minmax(68px, 26vw) minmax(0, 1fr); max-width: 100%; width: 334px; }
+      .footer-brand .footer-mark { width: 100%; }
+      .footer-copy, .footer-brand .footer-wordmark, .footer-brand p.footer-tagline { width: 100%; }
+      .footer-nav { flex-wrap: wrap; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .button { transition: none; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="masthead">
+      <nav class="nav wrap" aria-label="Main navigation">
+        <a class="brand" href="#top" aria-label="TaskHitch home"><img class="brand-mark" src="TaskHitch-logo-accent.svg" alt=""><img class="brand-wordmark" src="TaskHitch-wordmark-accent.svg" alt="TaskHitch"></a>
+        <div class="nav-links">
+          <a href="#product">Product</a>
+          <a href="#difference">Why TaskHitch</a>
+          <a href="#updates">Updates</a>
+          <a href="#founder">About</a>
+        </div>
+        <div class="nav-actions"><a class="button primary" href="#product">Explore the product <span class="arrow">→</span></a></div>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero wrap" aria-labelledby="hero-heading">
+        <div class="hero-copy">
+          <p class="eyebrow">Collaborative project management</p>
+          <h1 id="hero-heading">See what needs attention. Keep work moving.</h1>
+          <p class="lead">When your team has a lot moving at once, TaskHitch gives you and your team a shared place to see what matters, bring the right people in, and take the next step together.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#product">See how it works <span class="arrow">→</span></a>
+            <a class="button secondary" href="#updates">Get launch updates <span class="arrow">→</span></a>
+          </div>
+          <p class="hero-note"><span>Your next step</span> is easier to see.</p>
+        </div>
+      </section>
+
+      <div class="wrap" aria-label="TaskHitch project board preview">
+        <div class="product-frame"><img class="hero-product-capture" src="screenshots/taskhitch-board-full-window.png" alt="TaskHitch board showing work across the team"></div>
+        <p class="caption">Start with the view that helps you orient. More structure is there when the work needs it.</p>
+      </div>
+
+      <section id="product">
+        <div class="wrap">
+          <div class="section-intro">
+            <p class="eyebrow">The product</p>
+            <h2>Keep your work visible—and the context close.</h2>
+            <p class="lead">TaskHitch helps you and your team get oriented quickly, then gives you the depth you need as the work unfolds.</p>
+          </div>
+          <div class="screen-stack">
+            <article class="feature-screen">
+              <div class="screen-copy"><p class="screen-number">01 / ORIENT</p><h3>See what needs you now.</h3><p>Your board gives you a clear picture of what is moving, what is waiting, and where your attention can make a difference.</p></div>
+              <figure class="mini-frame product-capture" aria-label="TaskHitch board view"><img src="screenshots/taskhitch-board.png" alt="TaskHitch board showing planned, active, and completed work"></figure>
+            </article>
+            <article class="feature-screen reverse">
+              <div class="screen-copy"><p class="screen-number">02 / PLAN</p><h3>Plan together, with fewer surprises.</h3><p>When a date shifts, you can see the work around it and have the conversation before a small change becomes a surprise.</p></div>
+              <figure class="mini-frame product-capture" aria-label="TaskHitch Gantt view"><img src="screenshots/taskhitch-gantt.png" alt="TaskHitch Gantt view showing work scheduled across time"></figure>
+            </article>
+            <article class="feature-screen">
+              <div class="screen-copy"><p class="screen-number">03 / CONTEXT</p><h3>Keep every answer within reach.</h3><p>Your notes, updates, decisions, and people stay connected to the task—so you can spend less time piecing together the story and more time moving it forward.</p></div>
+              <figure class="mini-frame product-capture" aria-label="TaskHitch task detail"><img src="screenshots/taskhitch-task-modal.png" alt="TaskHitch task detail showing context, people, and updates"></figure>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="difference" id="difference">
+        <div class="wrap">
+          <p class="eyebrow">Why TaskHitch</p>
+          <h2>PROJECT management.</h2>
+          <p class="lead">You should spend your time moving the work forward—not maintaining the tool around it. TaskHitch gives you enough structure to stay clear and keep going.</p>
+          <div class="principles">
+            <div class="principle"><h3>Essential first</h3><p>Start with what helps you act now. When the work asks for more, the structure is already there for you.</p></div>
+            <div class="principle"><h3>Context connected</h3><p>Updates and decisions stay with the workflow, so your team can share the picture without spending time piecing together what has already been decided.</p></div>
+            <div class="principle"><h3>Participation that fits</h3><p>Your whole team can contribute, even when people work in different ways or on different schedules.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="participation">
+        <div class="wrap advanced-grid">
+          <div>
+            <p class="eyebrow">Advanced participation</p>
+            <h2>Keep your whole team in the picture.</h2>
+            <p class="lead">TaskHitch brings the information you need right to the work, so you can see what matters and contribute with confidence, whether you are there every day or only when the moment calls for you.</p>
+            <p class="plan-note"><strong>Available with Advanced.</strong> Email-connected updates are a clear path for occasional contributors; they are not a substitute for team access.</p>
+          </div>
+          <div class="advanced-panel" aria-label="Email update request preview">
+            <div class="email-top"><span>New message</span><span>TaskHitch</span></div>
+            <div class="email-body">
+              <div class="email-to">To: amir@northline.example</div>
+              <h4>Update requested: approve participant materials</h4>
+              <p>Could you share the current status before Friday? Your reply will be kept with the task so the project team has the latest answer.</p>
+              <span class="email-button">Reply with an update</span>
+              <div class="email-foot">Autumn campaign · Northline · You are receiving this request because you are connected to this task.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="coming-soon" id="updates">
+        <div class="wrap coming-grid">
+          <div>
+            <p class="eyebrow">Coming soon</p>
+            <h2>Be part of what comes next.</h2>
+            <p class="lead">TaskHitch is being built for teams who want a clearer, more efficient way to move shared work forward. Join the list for launch updates and an early look at what you can do with it.</p>
+          </div>
+          <div class="coming-card">
+            <p class="eyebrow">Get launch updates</p>
+            <h3>Be first to see TaskHitch in full view.</h3>
+            <form class="signup-form" action="#" method="post" aria-label="TaskHitch launch updates sign-up">
+              <div class="form-row"><label for="signup-name">First name</label><input id="signup-name" name="name" type="text" autocomplete="given-name" placeholder="Your first name"></div>
+              <div class="form-row"><label for="signup-email">Work email</label><input id="signup-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required></div>
+              <button class="button primary" type="submit">Keep me updated <span class="arrow">→</span></button>
+              <p class="form-note">Launch updates only. Your details will not be shared.</p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="founder">
+        <div class="wrap founder">
+          <div><p class="eyebrow">A note from the founder</p><div class="quote-mark" aria-hidden="true">“</div></div>
+          <div class="founder-copy"><blockquote>I built TaskHitch because I needed a better way to keep complex work moving with people who did not all participate through the same daily workflow.</blockquote><p>When work involves several people and a lot of moving parts, the details should not be scattered across an inbox, a spreadsheet, and a meeting agenda.</p><p>TaskHitch makes the essential work easy to see, keeps deeper structure ready when it is needed, and keeps responsibility, updates, and decisions connected to the workflow.</p><p class="founder-sign"><strong>Jason Burns</strong>Founder, TaskHitch</p></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footer-top"><div class="footer-brand"><div class="footer-lockup"><img class="footer-mark" src="TaskHitch-logo-dark.svg" alt=""><div class="footer-copy"><img class="footer-wordmark" src="TaskHitch-wordmark-dark.svg" alt="TaskHitch"><p class="footer-tagline">Work in full view.</p></div></div></div><nav class="footer-nav" aria-label="Footer navigation"><a href="#product">Product</a><a href="#updates">Updates</a><a href="#founder">About</a><a href="#top">Back to top</a></nav></div>
+        <div class="footer-bottom">TaskHitch LLC · October 2026</div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

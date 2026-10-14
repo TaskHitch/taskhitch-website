@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="550" height="500" viewBox="0 0 110 100" role="img" aria-labelledby="title desc">
+  <title id="title">TaskHitch logo</title>
+  <desc id="desc">An interwoven T and H monogram in dark chrome and blue.</desc>
+
+  <!-- Primary light-surface colors: dark chrome #2C2721 and TaskHitch blue #2E7CBF. -->
+  <path fill="#2C2721" d="M4 0H76L72.832 20H48.832L36.162 100H12.162L24.832 20H.832Z"/>
+  <path fill="#2E7CBF" d="M18.924 57.305L40.913 70L36.162 100H12.162Z"/>
+
+  <path fill="#2C2721" d="M28 0H52L36.162 100H12.162Z"/>
+  <path fill="#2C2721" d="M86 0H110L94.162 100H70.162Z"/>
+  <path fill="#2E7CBF" d="M18.924 57.305L40.913 70L36.162 100H12.162Z"/>
+  <path fill="#2E7CBF" d="M78.400 47.985L100.389 60.681L94.162 100H70.162Z"/>
+  <path fill="#2E7CBF" d="M47.248 30L100.389 60.681L97.221 80.681L44.081 50Z"/>
+  <path fill="#2C2721" d="M22.092 37.305L75.232 67.985L72.065 87.985L18.924 57.305Z"/>
+</svg>
